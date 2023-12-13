@@ -1,6 +1,6 @@
 {
   "name": "choas-react",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "choas-react",
   "main": "./lib/index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "css-loader": "^6.8.1",
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
+    "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.69.5",
     "sass-loader": "^13.3.2",

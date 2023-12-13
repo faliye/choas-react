@@ -1,14 +1,11 @@
 {
   "name": "choas-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "choas-react",
   "main": "./lib/index.js",
   "scripts": {
     "test": "test",
-    "build": "node ./scripts/build.js",
-    "b": "npx webpack ./scripts/webpack/common.js",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "node ./scripts/build.js"
   },
   "repository": {
     "type": "git",

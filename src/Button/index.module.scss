@@ -1,0 +1,25 @@
+@import '../../config/styles/them.scss';
+.btn{
+  background: #fff;
+  color: $text;
+}
+
+.btn-primary{
+  background: $primary
+}
+
+.btn-danger{
+  background:  $danger
+}
+
+.btn-ghost{
+  background: $ghost
+}
+
+.btn-link{
+  color:  $link
+}
+
+
+
+

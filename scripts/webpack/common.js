@@ -1,5 +1,5 @@
 const path = require('path');
-const TerserWebpack =  require("terser-webpack-plugin");
+const TerserWebpack = require("terser-webpack-plugin");
 const { createEntries } = require('./function');
 
 module.exports = {
@@ -18,8 +18,8 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
-                        },
+                            modules: true
+                        }
                     },
                     { loader: 'sass-loader' },
                 ],
@@ -32,7 +32,7 @@ module.exports = {
             }
         ]
     },
-    plugins:[
+    plugins: [
         new TerserWebpack({
             extractComments: false,
         })

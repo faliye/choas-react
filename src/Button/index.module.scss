@@ -20,6 +20,19 @@
   color:  $link
 }
 
+.btn-large{
+  height: $large-line-hight;
+  border-radius: $large-border-radius; 
+}
 
+.btn-normal{
+  height: $normal-line-hight;
+  border-radius: $normal-border-radius; 
+}
+
+.btn-small{
+  height: $small-line-hight;
+  border-radius: $small-border-radius; 
+}
 
 

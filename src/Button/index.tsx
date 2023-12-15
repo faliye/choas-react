@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './index.module.scss';
 
 interface ButtonProps {
-  children: React.ReactNode,
+  btnTxt: 'string',
   type?: 'primary' | 'danger' | 'ghost' | 'link',
   className?: string,
   onClick?: () => void,
@@ -19,13 +19,12 @@ let cx = classNames.bind({
 });
 
 const Button = ({
-  children,
+  btnTxt,
   type,
   render,
   onClick,
   className,
 }: ButtonProps) => {
-  const a = styles.button
   const btnClass = cx({
     btn: true,
     primary: type === 'primary',
@@ -42,7 +41,7 @@ const Button = ({
       onClick={onClick}
     >
       {
-        children ? children : render?.()
+        btnTxt ? btnTxt : render?.()
       }
     </button>
   );

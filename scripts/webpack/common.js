@@ -8,6 +8,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, '../../lib'),
         filename: '[name].js',
+        libraryTarget: 'umd'
     },
     module: {
         rules: [

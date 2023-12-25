@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Children } from 'react';
 import classNames from 'classnames/bind';
 import styles from './index.module.scss';
 
 interface ButtonProps {
-  btnTxt: 'string',
   type?: 'primary' | 'danger' | 'ghost' | 'link',
   size?: 'large' | 'normal' | 'small',
   className?: string,
   onClick?: () => void,
-  render?: () => React.ReactNode
+  children?: React.ReactElement | string
+  htmlType?: 'reset' | 'submit' | 'button'
+  block?: boolean
 }
 
 let cx = classNames.bind({
@@ -20,15 +21,17 @@ let cx = classNames.bind({
   large: styles['btn-large'],
   normal: styles['btn-normal'],
   small: styles['btn-small'],
+  block: styles['btn-block'],
 });
 
 const Button = ({
-  btnTxt,
   type,
   size = 'normal',
-  render,
+  children,
   onClick,
   className,
+  htmlType = 'button',
+  block = false
 }: ButtonProps) => {
   const btnClass = cx({
     btn: true,
@@ -40,16 +43,17 @@ const Button = ({
     large: size === 'large',
     normal: size === 'normal',
     small: size === 'small',
+    block
   });
 
   return (
     <button
-      type="button"
+      type={htmlType}
       className={btnClass}
       onClick={onClick}
     >
       {
-        btnTxt ? btnTxt : render?.()
+        children
       }
     </button>
   );

@@ -1,38 +1,273 @@
+@use 'sass:color';
 @import '../../config/styles/them.scss';
-.btn{
-  background: #fff;
+
+
+.btn {
   color: $text;
+  cursor: pointer;
+  border: solid;
+  overflow: hidden;
+
+  &-primary {
+    background: $primary;
+    border-color: $primary;
+    color: $font-color;
+
+    &:hover {
+      background: color.adjust($primary, $blue: 50%);
+    }
+
+    @keyframes btnPrimary {
+      0% {
+        background: color.adjust($primary, $lightness: +30%, $alpha: -0.2);
+        width: 0;
+        height: 0;
+        left: 50%;
+        top: 50%;
+      }
+
+      30% {
+        background: color.adjust($primary, $lightness: -30%, $alpha: -0.4);
+        width: 50px;
+        height: 50px;
+        left: calc(50% - 25px);
+        top: calc(50% - 25px);
+        border-radius: 50px;
+      }
+
+      60% {
+        background: transparent;
+        width: 100px;
+        height: 100px;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        border-radius: 100px;
+      }
+
+      100% {
+        background: color.adjust($primary, $lightness: -30%, $alpha: -0.4);
+        width: 100vw;
+        height: 100vw;
+        border-radius: 100vw;
+        left: 0;
+        top: -50vw;
+      }
+    }
+
+    &:active {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        animation: btnPrimary $btn-animation-duration linear 1 forwards;
+      }
+    }
+  }
+
+
+  &-danger {
+    background: $danger;
+    border-color: $danger;
+    color: $font-color;
+
+    &:hover {
+      background: color.adjust($danger, $red: 50%);
+    }
+
+    
+    @keyframes btn-danger {
+      0% {
+        background: color.adjust($danger, $lightness: +30%, $alpha: -0.2);
+        width: 0;
+        height: 0;
+        left: 50%;
+        top: 50%;
+      }
+
+      30% {
+        background: color.adjust($danger, $lightness: -30%, $alpha: -0.4);
+        width: 50px;
+        height: 50px;
+        left: calc(50% - 25px);
+        top: calc(50% - 25px);
+        border-radius: 50px;
+      }
+
+      60% {
+        background: transparent;
+        width: 100px;
+        height: 100px;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        border-radius: 100px;
+      }
+
+      100% {
+        background: color.adjust($danger, $lightness: -30%, $alpha: -0.4);
+        width: 100vw;
+        height: 100vw;
+        border-radius: 100vw;
+        left: 0;
+        top: -50vw;
+      }
+    }
+
+    &:active {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        animation: btn-danger $btn-animation-duration linear 1 forwards;
+      }
+    }
+  }
+
+  &-ghost {
+    background-color: $disable-ghost-color;
+    border-color: $ghost;
+    color: $font-color;
+
+    &:hover {
+      background: transparent;
+      color: $primary;
+      border-color: $primary;
+    }
+
+    
+    @keyframes btn-ghost {
+      0% {
+        background: color.adjust($primary, $lightness: +30%, $alpha: -0.8);
+        width: 0;
+        height: 0;
+        left: 50%;
+        top: 50%;
+      }
+
+      30% {
+        background: color.adjust($primary, $lightness: -30%, $alpha: -0.4);
+        width: 50px;
+        height: 50px;
+        left: calc(50% - 25px);
+        top: calc(50% - 25px);
+        border-radius: 50px;
+      }
+
+      60% {
+        background: transparent;
+        width: 100px;
+        height: 100px;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        border-radius: 100px;
+      }
+
+      100% {
+        background: color.adjust($primary, $lightness: +30%, $alpha: -0.8);
+        width: 100vw;
+        height: 100vw;
+        border-radius: 100vw;
+        left: 0;
+        top: -50vw;
+      }
+    }
+
+    &:active {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        animation: btn-ghost $btn-animation-duration linear 1 forwards;
+      }
+    }
+  }
+
+  &-link {
+    color: $link;
+    border: none;
+    background: #fff;
+
+    &:hover {
+      color: color.adjust($link, $green: 50%);
+    }
+
+    @keyframes btn-link {
+      0% {
+        background: color.adjust($link, $lightness: +30%, $alpha: -0.8);
+        width: 0;
+        height: 0;
+        left: 50%;
+        top: 50%;
+      }
+
+      30% {
+        background: color.adjust($link, $lightness: -30%, $alpha: -0.4);
+        width: 50px;
+        height: 50px;
+        left: calc(50% - 25px);
+        top: calc(50% - 25px);
+        border-radius: 50px;
+      }
+
+      60% {
+        background: transparent;
+        width: 100px;
+        height: 100px;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        border-radius: 100px;
+      }
+
+      100% {
+        background: color.adjust($primary, $lightness: +30%, $alpha: -0.8);
+        width: 100vw;
+        height: 100vw;
+        border-radius: 100vw;
+        left: 0;
+        top: -50vw;
+      }
+    }
+
+    &:active {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        animation: btn-link $btn-animation-duration linear 1 forwards;
+      }
+    }
+  }
+
+  &-large {
+    border-radius: $large-border-radius;
+    padding: $large-padding;
+    font-size: $large-font-size;
+    border-width: $large-border-width;
+  }
+
+  &-normal {
+    border-radius: $normal-border-radius;
+    padding: $normal-padding;
+    font-size: $normal-font-size;
+    border-width: $normal-border-width;
+  }
+
+  &-small {
+    border-radius: $small-border-radius;
+    padding: $small-padding;
+    font-size: $small-font-size;
+    border-width: $small-border-width;
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
 }
-
-.btn-primary{
-  background: $primary
-}
-
-.btn-danger{
-  background:  $danger
-}
-
-.btn-ghost{
-  background: $ghost
-}
-
-.btn-link{
-  color:  $link
-}
-
-.btn-large{
-  height: $large-line-hight;
-  border-radius: $large-border-radius; 
-}
-
-.btn-normal{
-  height: $normal-line-hight;
-  border-radius: $normal-border-radius; 
-}
-
-.btn-small{
-  height: $small-line-hight;
-  border-radius: $small-border-radius; 
-}
-
-

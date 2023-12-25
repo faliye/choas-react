@@ -1,6 +1,6 @@
 {
   "name": "choas-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "choas-react",
   "main": "./lib/index.js",
   "scripts": {

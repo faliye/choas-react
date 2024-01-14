@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './index.module.scss';
 
@@ -6,10 +6,11 @@ interface ButtonProps {
   type?: 'primary' | 'danger' | 'ghost' | 'link',
   size?: 'large' | 'normal' | 'small',
   className?: string,
-  onClick?: () => void,
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
   children?: React.ReactElement | string
   htmlType?: 'reset' | 'submit' | 'button'
-  block?: boolean
+  block?: boolean,
+  waterWave?: false,
 }
 
 let cx = classNames.bind({
@@ -31,7 +32,8 @@ const Button = ({
   onClick,
   className,
   htmlType = 'button',
-  block = false
+  block = false,
+  waterWave = false,
 }: ButtonProps) => {
   const btnClass = cx({
     btn: true,
@@ -45,12 +47,19 @@ const Button = ({
     small: size === 'small',
     block
   });
+  
+  const onClickHandle = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if(waterWave){
+      console.log(123);
+    }
+    onClick?.();
+  }, [waterWave, onClick]);
 
   return (
     <button
       type={htmlType}
       className={btnClass}
-      onClick={onClick}
+      onClick={onClickHandle}
     >
       {
         children

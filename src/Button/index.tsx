@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import classNames from 'classnames/bind';
+import classNames from 'classnames';
 import styles from './index.module.scss';
 
 interface ButtonProps {
@@ -13,18 +13,6 @@ interface ButtonProps {
   waterWave?: false,
 }
 
-let cx = classNames.bind({
-  btn: styles.btn,
-  primary: styles['btn-primary'],
-  danger: styles['btn-danger'],
-  ghost: styles['btn-ghost'],
-  link: styles['btn-link'],
-  large: styles['btn-large'],
-  normal: styles['btn-normal'],
-  small: styles['btn-small'],
-  block: styles['btn-block'],
-});
-
 const Button = ({
   type,
   size = 'normal',
@@ -35,21 +23,19 @@ const Button = ({
   block = false,
   waterWave = false,
 }: ButtonProps) => {
-  const btnClass = cx({
-    btn: true,
-    primary: type === 'primary',
-    danger: type === 'danger',
-    ghost: type === 'ghost',
-    link: type === 'link',
-    [className as string]: true,
-    large: size === 'large',
-    normal: size === 'normal',
-    small: size === 'small',
-    block
-  });
-  
+  const btnClass = classNames(styles.btn, {
+    [styles["btn-primary"]]: type === 'primary',
+    [styles["btn-danger"]]: type === 'danger',
+    [styles["btn-ghost"]]: type === 'ghost',
+    [styles["btn-link"]]: type === 'link',
+    [styles["btn-large"]]: size === 'large',
+    [styles["btn-normal"]]: size === 'normal',
+    [styles["btn-small"]]: size === 'small',
+    [styles["btn-block"]]: block
+  }, className);
+
   const onClickHandle = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if(waterWave){
+    if (waterWave) {
       console.log(123);
     }
     onClick?.();

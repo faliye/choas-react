@@ -1,5 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { WaterWave } from './WaterWave'
+import { IWaterWavePoint } from './index.d';
 import classNames from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
+
 import styles from './index.module.scss';
 
 interface ButtonProps {
@@ -10,7 +14,7 @@ interface ButtonProps {
   children?: React.ReactElement | string
   htmlType?: 'reset' | 'submit' | 'button'
   block?: boolean,
-  waterWave?: false,
+  waterWave?: boolean,
 }
 
 const Button = ({
@@ -21,8 +25,9 @@ const Button = ({
   className,
   htmlType = 'button',
   block = false,
-  waterWave = false,
+  waterWave: isWaterWave = false,
 }: ButtonProps) => {
+
   const btnClass = classNames(styles.btn, {
     [styles["btn-primary"]]: type === 'primary',
     [styles["btn-danger"]]: type === 'danger',
@@ -34,12 +39,18 @@ const Button = ({
     [styles["btn-block"]]: block
   }, className);
 
+  const [waveList, setWaveList] = useState<IWaterWavePoint[]>([]);
+
   const onClickHandle = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (waterWave) {
-      console.log(123);
+    if (isWaterWave) {
+      setWaveList([...waveList, {
+        x: e.nativeEvent.offsetY,
+        y: e.nativeEvent.offsetX,
+        id: uuidv4(),
+      }])
     }
     onClick?.();
-  }, [waterWave, onClick]);
+  }, [isWaterWave, waveList, onClick]);
 
   return (
     <button
@@ -49,6 +60,11 @@ const Button = ({
     >
       {
         children
+      }
+      {
+        waveList.map((waterWavePoint: IWaterWavePoint) => {
+          return <WaterWave waterWavePoint={waterWavePoint} key={waterWavePoint.id} />
+        })
       }
     </button>
   );

@@ -7,6 +7,14 @@
   cursor: pointer;
   border: solid;
   overflow: hidden;
+  position: relative;
+
+
+  &-waterWave {
+    position: absolute;
+    border-radius: 100%;
+
+  }
 
   &-primary {
     background: $primary;
@@ -17,55 +25,10 @@
       background: color.adjust($primary, $blue: 50%);
     }
 
-    @keyframes btnPrimary {
-      0% {
-        background: color.adjust($primary, $lightness: +30%, $alpha: -0.2);
-        width: 0;
-        height: 0;
-        left: 50%;
-        top: 50%;
-      }
-
-      30% {
-        background: color.adjust($primary, $lightness: -30%, $alpha: -0.4);
-        width: 50px;
-        height: 50px;
-        left: calc(50% - 25px);
-        top: calc(50% - 25px);
-        border-radius: 50px;
-      }
-
-      60% {
-        background: transparent;
-        width: 100px;
-        height: 100px;
-        left: calc(50% - 50px);
-        top: calc(50% - 50px);
-        border-radius: 100px;
-      }
-
-      100% {
-        background: color.adjust($primary, $lightness: -30%, $alpha: -0.4);
-        width: 100vw;
-        height: 100vw;
-        border-radius: 100vw;
-        left: 0;
-        top: -50vw;
-      }
-    }
-
-    &:active {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        animation: btnPrimary $btn-animation-duration linear 1 forwards;
-      }
+    .btn-waterWave {
+      background: color.adjust($primary, $lightness: 60%, $alpha: -0.5);
     }
   }
-
 
   &-danger {
     background: $danger;
@@ -76,53 +39,8 @@
       background: color.adjust($danger, $red: 50%);
     }
 
-    
-    @keyframes btn-danger {
-      0% {
-        background: color.adjust($danger, $lightness: +30%, $alpha: -0.2);
-        width: 0;
-        height: 0;
-        left: 50%;
-        top: 50%;
-      }
-
-      30% {
-        background: color.adjust($danger, $lightness: -30%, $alpha: -0.4);
-        width: 50px;
-        height: 50px;
-        left: calc(50% - 25px);
-        top: calc(50% - 25px);
-        border-radius: 50px;
-      }
-
-      60% {
-        background: transparent;
-        width: 100px;
-        height: 100px;
-        left: calc(50% - 50px);
-        top: calc(50% - 50px);
-        border-radius: 100px;
-      }
-
-      100% {
-        background: color.adjust($danger, $lightness: -30%, $alpha: -0.4);
-        width: 100vw;
-        height: 100vw;
-        border-radius: 100vw;
-        left: 0;
-        top: -50vw;
-      }
-    }
-
-    &:active {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        animation: btn-danger $btn-animation-duration linear 1 forwards;
-      }
+    .btn-waterWave {
+      background: color.adjust($danger, $lightness: 30%, $alpha: -0.5);
     }
   }
 
@@ -137,53 +55,8 @@
       border-color: $primary;
     }
 
-    
-    @keyframes btn-ghost {
-      0% {
-        background: color.adjust($primary, $lightness: +30%, $alpha: -0.8);
-        width: 0;
-        height: 0;
-        left: 50%;
-        top: 50%;
-      }
-
-      30% {
-        background: color.adjust($primary, $lightness: -30%, $alpha: -0.4);
-        width: 50px;
-        height: 50px;
-        left: calc(50% - 25px);
-        top: calc(50% - 25px);
-        border-radius: 50px;
-      }
-
-      60% {
-        background: transparent;
-        width: 100px;
-        height: 100px;
-        left: calc(50% - 50px);
-        top: calc(50% - 50px);
-        border-radius: 100px;
-      }
-
-      100% {
-        background: color.adjust($primary, $lightness: +30%, $alpha: -0.8);
-        width: 100vw;
-        height: 100vw;
-        border-radius: 100vw;
-        left: 0;
-        top: -50vw;
-      }
-    }
-
-    &:active {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        animation: btn-ghost $btn-animation-duration linear 1 forwards;
-      }
+    .btn-waterWave {
+      background: color.adjust($font-color, $blue: 30%, $alpha: -0.5);
     }
   }
 
@@ -196,52 +69,8 @@
       color: color.adjust($link, $green: 50%);
     }
 
-    @keyframes btn-link {
-      0% {
-        background: color.adjust($link, $lightness: +30%, $alpha: -0.8);
-        width: 0;
-        height: 0;
-        left: 50%;
-        top: 50%;
-      }
-
-      30% {
-        background: color.adjust($link, $lightness: -30%, $alpha: -0.4);
-        width: 50px;
-        height: 50px;
-        left: calc(50% - 25px);
-        top: calc(50% - 25px);
-        border-radius: 50px;
-      }
-
-      60% {
-        background: transparent;
-        width: 100px;
-        height: 100px;
-        left: calc(50% - 50px);
-        top: calc(50% - 50px);
-        border-radius: 100px;
-      }
-
-      100% {
-        background: color.adjust($primary, $lightness: +30%, $alpha: -0.8);
-        width: 100vw;
-        height: 100vw;
-        border-radius: 100vw;
-        left: 0;
-        top: -50vw;
-      }
-    }
-
-    &:active {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        animation: btn-link $btn-animation-duration linear 1 forwards;
-      }
+    .btn-waterWave {
+      background: color.adjust($link, $green: 50%, $alpha: -0.5);
     }
   }
 

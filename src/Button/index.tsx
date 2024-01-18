@@ -1,4 +1,4 @@
-import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, useCallback, useState } from 'react';
 import { WaterWave } from './WaterWave'
 import { IWaterWavePoint } from './index.d';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ interface ButtonProps {
   type?: 'primary' | 'danger' | 'ghost' | 'link',
   size?: 'large' | 'normal' | 'small',
   className?: string,
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void,
   children?: React.ReactElement | string
   htmlType?: 'reset' | 'submit' | 'button'
   block?: boolean,
@@ -41,11 +41,24 @@ const Button = ({
 
   const [waveList, setWaveList] = useState<IWaterWavePoint[]>([]);
 
-  const onClickHandle = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const removeHandler = useCallback((id: string) => {
+    setWaveList(waveList.filter(item => item.id !== id));
+  }, [waveList])
+
+  const onClickHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (isWaterWave) {
+      const target = e.target as HTMLButtonElement;
+      const x = e.nativeEvent.offsetX;
+      const y = e.nativeEvent.offsetY;
+      const pH = target.clientHeight;
+      const pW = target.clientWidth;
       setWaveList([...waveList, {
-        x: e.nativeEvent.offsetY,
-        y: e.nativeEvent.offsetX,
+        x,
+        y,
+        pW,
+        pH,
+        moveDirectX: x > pW / 2 ? -1 : 1,
+        moveDirectY: y > pH / 2 ? -1 : 1,
         id: uuidv4(),
       }])
     }
@@ -56,14 +69,19 @@ const Button = ({
     <button
       type={htmlType}
       className={btnClass}
-      onClick={onClickHandle}
+      onClick={onClickHandler}
     >
       {
         children
       }
       {
         waveList.map((waterWavePoint: IWaterWavePoint) => {
-          return <WaterWave waterWavePoint={waterWavePoint} key={waterWavePoint.id} />
+          return <WaterWave
+            waterWavePoint={waterWavePoint}
+            key={waterWavePoint.id}
+            isBlock={block}
+            removeHandler={removeHandler}
+          />
         })
       }
     </button>

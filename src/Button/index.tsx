@@ -37,7 +37,7 @@ const Button = ({
     [styles["btn-normal"]]: size === 'normal',
     [styles["btn-small"]]: size === 'small',
     [styles["btn-block"]]: block,
-    
+
   }, className);
 
   const [wavePoint, setWavePoint] = useState<IWaterWavePoint>();
@@ -67,6 +67,9 @@ const Button = ({
       type={htmlType}
       className={btnClass}
       onClick={onClickHandler}
+      style={isWaterWave ? {
+        boxShadow: "none",
+      } : {}}
     >
       {
         children

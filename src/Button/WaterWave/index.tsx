@@ -1,59 +1,79 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IWaterWavePoint } from "../index.d";
 
 import styles from '../index.module.scss';
 
 interface IWaterWaveProps {
-    waterWavePoint: IWaterWavePoint
-    removeHandler: (id: string) => void
-    isBlock: boolean
+    wavePoint?: IWaterWavePoint
+    speedCoe?: number
 }
 
-export const WaterWave = ({ waterWavePoint, removeHandler, isBlock }: IWaterWaveProps) => {
-    const divRef = useRef<HTMLDivElement>(null);
+type IWaterWavePointWater = IWaterWavePoint & {
+    nx: number,
+    ny: number,
+    spd: number,
+    opt: number
+}
+
+export const WaterWave = ({ wavePoint }: IWaterWaveProps) => {
+    const [waveList, setWaveList] = useState<(IWaterWavePointWater)[]>([]);
     const timer = useRef<NodeJS.Timeout | null>(null);
-    const speed = isBlock ? 12 : 4;
     useEffect(() => {
-        timer.current = setInterval(() => {
-            if (divRef.current) {
-                if (divRef.current?.style) {
-                    const { x, y, pW, pH, moveDirectY, moveDirectX } = waterWavePoint;
-                    let top = parseInt(divRef.current.style.top);
-                    let left = parseInt(divRef.current.style.left);
-                    top = isNaN(top) ? y : top;
-                    left = isNaN(left) ? x : left;
-                    if (moveDirectX > 0) {
-                        if (left > 0) {
-                            divRef.current.style.left = left - speed / 2 + 'px';
-                        }
-                        if (divRef.current.clientWidth > pW + x) {
-                            removeHandler(waterWavePoint.id);
-                        }
-                    } else {
-                        if (left > 0) {
-                            divRef.current.style.left = left - speed / 2 + 'px';
-                        } else {
-                            removeHandler(waterWavePoint.id);
-                        }
-                    }
-                    divRef.current.style.top = (top - speed / 2) + 'px';
-                    divRef.current.style.width = divRef.current?.clientWidth + speed + 'px';
-                    divRef.current.style.height = divRef.current?.clientHeight + speed + 'px';
-                    divRef.current.style.opacity = parseInt(divRef.current.style.opacity) + 0.1 + ''
-                }
-            }
-        }, 16);
-        return () => {
+        if (wavePoint) {
             if (timer.current) {
                 clearInterval(timer.current);
+                timer.current = null;
+            }
+            setWaveList([...waveList, {
+                ...wavePoint,
+                nx: wavePoint.x,
+                ny: wavePoint.y,
+                spd: 1,
+                opt: 1
+            }]);
+        }
+    }, [wavePoint]);
+
+    useEffect(() => {
+        if (waveList.length) {
+            if (timer.current === null) {
+                timer.current = setInterval(() => {
+                    const newWaveList = waveList.map((item: IWaterWavePointWater) => {
+                        item.spd += 0.05;
+                        item.opt -= 0.01;
+                        item.nx -= item.spd;
+                        item.ny -= item.spd;
+                        item.width += item.spd * 2;
+                        item.height += item.spd * 2;
+                        return item;
+                    }).filter(item => item.width < item.pW);
+                    setWaveList([...newWaveList]);
+                }, 10);
+            }
+        } else {
+            if (timer.current) {
+                clearInterval(timer.current);
+                timer.current = null;
             }
         }
-    }, [divRef.current]);
-
-    return (
-        <div
-            ref={divRef}
-            className={styles["btn-waterWave"]}
-        />
-    );
+    }, [waveList]);
+    return <>
+        {
+            waveList.map(item => {
+                return (
+                    <div
+                        key={item.id}
+                        style={{
+                            top: item.ny + 'px',
+                            left: item.nx + 'px',
+                            width: item.width + 'px',
+                            height: item.height + 'px',
+                            opacity: item.opt,
+                        }}
+                        className={styles["btn-waterWave"]}
+                    />
+                );
+            })
+        }
+    </>
 }

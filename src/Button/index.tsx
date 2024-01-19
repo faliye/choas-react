@@ -36,14 +36,11 @@ const Button = ({
     [styles["btn-large"]]: size === 'large',
     [styles["btn-normal"]]: size === 'normal',
     [styles["btn-small"]]: size === 'small',
-    [styles["btn-block"]]: block
+    [styles["btn-block"]]: block,
+    
   }, className);
 
-  const [waveList, setWaveList] = useState<IWaterWavePoint[]>([]);
-
-  const removeHandler = useCallback((id: string) => {
-    setWaveList(waveList.filter(item => item.id !== id));
-  }, [waveList])
+  const [wavePoint, setWavePoint] = useState<IWaterWavePoint>();
 
   const onClickHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (isWaterWave) {
@@ -52,19 +49,19 @@ const Button = ({
       const y = e.nativeEvent.offsetY;
       const pH = target.clientHeight;
       const pW = target.clientWidth;
-      setWaveList([...waveList, {
+      setWavePoint({
         x,
         y,
         pW,
         pH,
-        moveDirectX: x > pW / 2 ? -1 : 1,
-        moveDirectY: y > pH / 2 ? -1 : 1,
+        width: 0,
+        height: 0,
         id: uuidv4(),
-      }])
+        ps: x > pW / 2 ? 'right' : 'left'
+      })
     }
     onClick?.();
-  }, [isWaterWave, waveList, onClick]);
-
+  }, [isWaterWave, onClick]);
   return (
     <button
       type={htmlType}
@@ -74,16 +71,11 @@ const Button = ({
       {
         children
       }
-      {
-        waveList.map((waterWavePoint: IWaterWavePoint) => {
-          return <WaterWave
-            waterWavePoint={waterWavePoint}
-            key={waterWavePoint.id}
-            isBlock={block}
-            removeHandler={removeHandler}
-          />
-        })
-      }
+      <div className={styles["btn-backgroud"]}>
+        {
+          isWaterWave ? <WaterWave wavePoint={wavePoint} /> : null
+        }
+      </div>
     </button>
   );
 };

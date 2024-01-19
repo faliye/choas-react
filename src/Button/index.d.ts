@@ -4,6 +4,7 @@ export interface IWaterWavePoint {
     id: string;
     pW: number,
     pH: number,
-    moveDirectX: -1 | 1,
-    moveDirectY: -1 | 1
+    width: number,
+    height: number,
+    ps: 'left' | 'right'
 }

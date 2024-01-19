@@ -8,70 +8,102 @@
   border: solid;
   overflow: hidden;
   position: relative;
-
-
-  &-waterWave {
-    position: absolute;
-    border-radius: 100%;
-
+  background: transparent;
+  
+  &:active {
+    box-shadow: 1px 1px 10px $disable-ghost-color;
   }
 
   &-primary {
-    background: $primary;
     border-color: $primary;
     color: $font-color;
 
-    &:hover {
+    
+
+    .btn-backgroud {
+      background: $primary;
+    }
+
+
+    &:hover .btn-backgroud {
       background: color.adjust($primary, $blue: 50%);
     }
 
     .btn-waterWave {
-      background: color.adjust($primary, $lightness: 60%, $alpha: -0.5);
+      background: color.adjust($primary, $lightness: 20%);
     }
   }
 
   &-danger {
-    background: $danger;
     border-color: $danger;
     color: $font-color;
 
-    &:hover {
+    .btn-backgroud {
+      background: $danger;
+    }
+
+    &:hover .btn-backgroud {
       background: color.adjust($danger, $red: 50%);
     }
 
     .btn-waterWave {
-      background: color.adjust($danger, $lightness: 30%, $alpha: -0.5);
+      background: color.adjust($danger, $lightness: 20%);
     }
   }
 
   &-ghost {
-    background-color: $disable-ghost-color;
     border-color: $ghost;
     color: $font-color;
 
+    .btn-backgroud {
+      background: $disable-ghost-color;
+    }
+
     &:hover {
-      background: transparent;
+      .btn-backgroud {
+        background: none;
+      }
+
       color: $primary;
       border-color: $primary;
     }
 
     .btn-waterWave {
-      background: color.adjust($font-color, $blue: 30%, $alpha: -0.5);
+      background: color.adjust($primary, $lightness: 30%);
     }
   }
 
   &-link {
     color: $link;
     border: none;
-    background: #fff;
+
+    .btn-backgroud {
+      background: #fff;
+    }
+
 
     &:hover {
       color: color.adjust($link, $green: 50%);
     }
 
     .btn-waterWave {
-      background: color.adjust($link, $green: 50%, $alpha: -0.5);
+      background: color.adjust($link, $lightness: 30%);
     }
+  }
+
+  &-waterWave {
+    position: absolute;
+    border-radius: 100%;
+    z-index: -10;
+  }
+
+  &-backgroud {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
   }
 
   &-large {

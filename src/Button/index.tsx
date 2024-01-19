@@ -1,4 +1,4 @@
-import React, { MouseEvent, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { WaterWave } from './WaterWave'
 import { IWaterWavePoint } from './index.d';
 import classNames from 'classnames';

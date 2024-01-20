@@ -14,6 +14,7 @@ interface ButtonProps {
   children?: React.ReactElement | string
   htmlType?: 'reset' | 'submit' | 'button'
   block?: boolean,
+  disable?: boolean,
   waterWave?: boolean,
 }
 
@@ -25,6 +26,7 @@ const Button = ({
   className,
   htmlType = 'button',
   block = false,
+  disable = false,
   waterWave: isWaterWave = false,
 }: ButtonProps) => {
 
@@ -37,31 +39,32 @@ const Button = ({
     [styles["btn-normal"]]: size === 'normal',
     [styles["btn-small"]]: size === 'small',
     [styles["btn-block"]]: block,
+    [styles["btn-disable"]]: disable,
 
   }, className);
 
   const [wavePoint, setWavePoint] = useState<IWaterWavePoint>();
 
   const onClickHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    if (disable) {
+      return
+    }
     if (isWaterWave) {
       const target = e.target as HTMLButtonElement;
       const x = e.nativeEvent.offsetX;
       const y = e.nativeEvent.offsetY;
-      const pH = target.clientHeight;
       const pW = target.clientWidth;
       setWavePoint({
         x,
         y,
         pW,
-        pH,
         width: 0,
         height: 0,
         id: uuidv4(),
-        ps: x > pW / 2 ? 'right' : 'left'
       })
     }
     onClick?.();
-  }, [isWaterWave, onClick]);
+  }, [isWaterWave, disable, onClick]);
   return (
     <button
       type={htmlType}

@@ -131,4 +131,16 @@
     display: block;
     width: 100%;
   }
+
+  &-disable{
+    background: $disable-ghost-color;
+    border-color: $disable-ghost-color;
+    color: #fff;
+    cursor: not-allowed;
+
+    &:hover{
+      color: #fff;
+      border-color: $disable-ghost-color;
+    }
+  }
 }

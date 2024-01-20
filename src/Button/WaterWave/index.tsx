@@ -57,6 +57,7 @@ export const WaterWave = ({ wavePoint }: IWaterWaveProps) => {
             }
         }
     }, [waveList]);
+    
     return <>
         {
             waveList.map(item => {

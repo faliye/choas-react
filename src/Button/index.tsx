@@ -11,12 +11,12 @@ interface ButtonProps {
   size?: 'large' | 'normal' | 'small',
   className?: string,
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void,
-  children?: React.ReactElement | string
-  htmlType?: 'reset' | 'submit' | 'button'
+  children?: React.ReactElement | string,
+  htmlType?: 'reset' | 'submit' | 'button',
   block?: boolean,
   disable?: boolean,
   waterWave?: boolean,
-  style?: CSSProperties
+  style?: CSSProperties,
 }
 
 const Button = ({
@@ -42,14 +42,13 @@ const Button = ({
     [styles["btn-small"]]: size === 'small',
     [styles["btn-block"]]: block,
     [styles["btn-disable"]]: disable,
-
   }, className);
 
   const [wavePoint, setWavePoint] = useState<IWaterWavePoint>();
 
   const onClickHandler = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     if (disable) {
-      return
+      return;
     }
     if (isWaterWave) {
       const target = e.target as HTMLButtonElement;
@@ -63,10 +62,11 @@ const Button = ({
         width: 0,
         height: 0,
         id: uuidv4(),
-      })
+      });
     }
     onClick?.();
   }, [isWaterWave, disable, onClick]);
+  
   return (
     <button
       type={htmlType}

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { CSSProperties, useCallback, useState } from 'react';
 import { WaterWave } from './WaterWave'
 import { IWaterWavePoint } from './index.d';
 import classNames from 'classnames';
@@ -16,6 +16,7 @@ interface ButtonProps {
   block?: boolean,
   disable?: boolean,
   waterWave?: boolean,
+  style?: CSSProperties
 }
 
 const Button = ({
@@ -28,6 +29,7 @@ const Button = ({
   block = false,
   disable = false,
   waterWave: isWaterWave = false,
+  style = {},
 }: ButtonProps) => {
 
   const btnClass = classNames(styles.btn, {
@@ -72,7 +74,8 @@ const Button = ({
       onClick={onClickHandler}
       style={isWaterWave ? {
         boxShadow: "none",
-      } : {}}
+        ...style
+      } : style}
     >
       {
         children

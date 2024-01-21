@@ -3,6 +3,8 @@
 
 
 .table {
+  border-collapse: collapse;
+
   &-header{
     background: #ccc;
   }

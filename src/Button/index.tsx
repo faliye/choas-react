@@ -66,16 +66,18 @@ const Button = ({
     }
     onClick?.();
   }, [isWaterWave, disable, onClick]);
-  
+
   return (
     <button
       type={htmlType}
       className={btnClass}
       onClick={onClickHandler}
-      style={isWaterWave ? {
-        boxShadow: "none",
-        ...style
-      } : style}
+      style={
+        isWaterWave ? {
+          boxShadow: "none",
+          ...style
+        } : style
+      }
     >
       {
         children

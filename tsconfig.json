@@ -25,6 +25,6 @@
       "@/*": ["src/*"]
     },
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "src/Table/TableHeader/index.tss"],
   "exclude": ["node_modules"]
 }

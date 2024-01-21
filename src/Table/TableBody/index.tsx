@@ -17,7 +17,6 @@ export const setDataEntries = (columns: ITableColumn[], dataEntries: string[] = 
         }
     })
     return dataEntries;
-
 }
 
 const TableBody = ({ data, columns }: ITableHeaderProps) => {
@@ -33,7 +32,9 @@ const TableBody = ({ data, columns }: ITableHeaderProps) => {
                     dataKey.map((key: string) => {
                         const item = data.find(item => item.key === key);
                         return (
-                            <td key={key}>
+                            <td
+                                key={key}
+                            >
                                 {
                                     item?.value
                                 }

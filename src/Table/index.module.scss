@@ -1,0 +1,9 @@
+@use 'sass:color';
+@import '../../config/styles/them.scss';
+
+
+.table {
+  &-header{
+    background: #ccc;
+  }
+}

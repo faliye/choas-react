@@ -2,12 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import { ITableDataItem, ITableColumn } from "../index.d";
 
 interface ITableHeaderProps {
-    data: ITableDataItem[],
+    data: ITableDataItem[][],
     columns: ITableColumn[],
     size?: 'large' | 'normal' | 'small',
+    pageSize?: number,
+    page?: number,
 }
 
-export const setDataEntries = (columns: ITableColumn[], dataEntries: string[] = []) => {
+export const setDataEntries = (
+    columns: ITableColumn[],
+    dataEntries: string[] = [],
+) => {
     columns.forEach((item: ITableColumn) => {
         if (item.children) {
             return setDataEntries(item.children, dataEntries);
@@ -20,30 +25,40 @@ export const setDataEntries = (columns: ITableColumn[], dataEntries: string[] = 
     return dataEntries;
 }
 
-const TableBody = ({ data, columns }: ITableHeaderProps) => {
+const TableBody = ({ data, columns, pageSize = 10, page = 1 }: ITableHeaderProps) => {
     const [dataKey, setDataKey] = useState<string[]>([]);
+    const [showData, setShowData] = useState<ITableDataItem[][]>([]);
 
     useEffect(() => {
         setDataKey(setDataEntries(columns));
     }, [columns]);
+
+    useEffect(() => {
+        if (data.length > pageSize) {
+            setShowData(data.slice((page - 1) * pageSize, page * pageSize));
+        }
+    }, [data, pageSize, page]);
+
     return (
         <tbody>
-            <tr>
-                {
-                    dataKey.map((key: string) => {
-                        const item = data.find(item => item.key === key);
-                        return (
-                            <td
-                                key={key}
-                            >
-                                {
-                                    item?.value
-                                }
-                            </td>
-                        )
-                    })
-                }
-            </tr>
+            {
+                showData.map((d: ITableDataItem[], index: number) => {
+                    return (
+                        <tr key={index}>
+                            {
+                                dataKey.map((key: string) => {
+                                    const item = d.find(item => item.key === key);
+                                    return (
+                                        <td key={key}>
+                                            {item?.value}
+                                        </td>
+                                    )
+                                })
+                            }
+                        </tr>
+                    )
+                })
+            }
         </tbody>
     )
 }

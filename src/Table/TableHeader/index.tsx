@@ -17,8 +17,6 @@ export const setDataEntries = (columns: ITableColumn[], dataEntries: ITableColum
     return dataEntries;
 }
 
-
-
 const TableHeader = ({ columns }: ITableHeaderProps) => {
     const [columnsByLv, setColumnsByLv] = useState<ITableColumn[][]>([]);
 

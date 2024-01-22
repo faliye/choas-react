@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ITableData, ITableColumn } from './index.d'
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
@@ -12,7 +12,11 @@ interface ITableProps {
     columns: ITableColumn[],
     width?: number,
     size?: 'large' | 'normal' | 'small',
-    isShowPagination?: boolean
+    isShowPagination?: boolean,
+    pagination?: {
+        onChange?: (page: number) => void,
+        pageSize?: number
+    }
 }
 
 const Table = ({
@@ -20,16 +24,18 @@ const Table = ({
     columns,
     size = 'normal',
     width = undefined,
-    isShowPagination = true
+    isShowPagination = true,
+    pagination = {}
 }: ITableProps) => {
+    const [page, setPage] = useState<number>(1);
 
     const tableClass = classNames(styles.table, {
     });
 
     const onPaginationChangeHandle = useCallback((page: number) => {
-        console.log(page);
-    }, [])
-
+        setPage(page);
+        pagination?.onChange?.(page);
+    }, [pagination])
     return (
         <div
             style={{
@@ -41,13 +47,19 @@ const Table = ({
                 border={1}
             >
                 <TableHeader columns={columns} />
-                <TableBody columns={columns} data={data} />
+                <TableBody
+                    columns={columns}
+                    data={data}
+                    page={page}
+                    pageSize={pagination.pageSize}
+                />
             </table>
             {
                 isShowPagination && (
                     <Pagination
                         size={size}
                         total={data.length}
+                        pageSize={pagination.pageSize}
                         onPaginationChange={onPaginationChangeHandle}
                     />
                 )

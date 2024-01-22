@@ -2,7 +2,7 @@ export interface ITableDataItem {
     [key: string]: any,
 }
 
-export type ITableData = ITableDataItem[];
+export type ITableData = ITableDataItem[][];
 
 export interface ITableColumn {
     key: string,

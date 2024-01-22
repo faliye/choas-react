@@ -13,7 +13,11 @@
     margin-left: 4px;
     cursor: pointer;
     text-align: center;
+
     &:hover{
+      color: $primary;
+    }
+    &-active{
       color: $primary;
     }
 

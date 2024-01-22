@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ITableData, ITableColumn } from './index.d'
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
+import Pagination from '../Pagination';
 import classNames from 'classnames';
 
 import styles from './index.module.scss';
@@ -9,21 +10,45 @@ import styles from './index.module.scss';
 interface ITableProps {
     data: ITableData,
     columns: ITableColumn[],
+    width?: number,
+    isShowPagination?: boolean
 }
 
 const Table = ({
     data,
     columns,
+    width = undefined,
+    isShowPagination = true
 }: ITableProps) => {
 
     const tableClass = classNames(styles.table, {
     });
 
+    const onPaginationChangeHandle = useCallback((page: number) => {
+        console.log(page);
+    }, [])
+
     return (
-        <table className={tableClass} border={1}>
-            <TableHeader columns={columns} />
-            <TableBody columns={columns} data={data} />
-        </table>
+        <div>
+            <table
+                className={tableClass}
+                border={1}
+                style={{
+                    width,
+                }}
+            >
+                <TableHeader columns={columns} />
+                <TableBody columns={columns} data={data} />
+            </table>
+            {
+                isShowPagination && (
+                    <Pagination
+                        total={data.length}
+                        onPaginationChange={onPaginationChangeHandle}
+                    />
+                )
+            }
+        </div>
     );
 }
 

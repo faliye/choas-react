@@ -29,13 +29,15 @@ const Table = ({
     }, [])
 
     return (
-        <div>
+        <div
+            style={{
+                width,
+            }}
+        >
             <table
                 className={tableClass}
                 border={1}
-                style={{
-                    width,
-                }}
+
             >
                 <TableHeader columns={columns} />
                 <TableBody columns={columns} data={data} />

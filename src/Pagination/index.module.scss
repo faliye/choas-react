@@ -1,0 +1,33 @@
+@use 'sass:color';
+@import '../../config/styles/them.scss';
+
+
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 8px;
+
+  &-item{
+    border: 1px solid $primary;
+    margin-left: 4px;
+    cursor: pointer;
+
+    &-large{
+      width:  $large-pagination-min-width;
+      height: $large-pagination-height;
+      border-radius: $large-pagination-border-radius;
+    }
+    &-normal{
+      width:  $normal-pagination-min-width;
+      height: $normal-pagination-height;
+      border-radius: $normal-pagination-border-radius;
+    }
+    &-small{
+      width:  $small-pagination-min-width;
+      height: $small-pagination-height;
+      border-radius: $small-border-radius;
+    }
+
+  }
+}

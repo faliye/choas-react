@@ -55,3 +55,26 @@ $btn-animation-duration: 0.3s;
 /**
  *-------------------------------button end -------------------------------
 */
+
+/**
+ *-------------------------------pagination-------------------------------
+*/
+
+// min-width
+$large-pagination-min-width: 30px;
+$normal-pagination-min-width: 26px;
+$small-pagination-min-width: 22px;
+
+// height
+$large-pagination-height: 30px;
+$normal-pagination-height: 26px;
+$small-pagination-height: 22px;
+
+// border-radius
+$large-pagination-border-radius: 8px;
+$normal-pagination-border-radius: 6px;
+$small-pagination-border-radius: 4px;
+
+/**
+ *-------------------------------pagination end -------------------------------
+*/

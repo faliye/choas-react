@@ -4,6 +4,7 @@ import { ITableDataItem, ITableColumn } from "../index.d";
 interface ITableHeaderProps {
     data: ITableDataItem[],
     columns: ITableColumn[],
+    size?: 'large' | 'normal' | 'small',
 }
 
 export const setDataEntries = (columns: ITableColumn[], dataEntries: string[] = []) => {

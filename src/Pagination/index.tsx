@@ -40,8 +40,8 @@ const Pagination = ({
     });
 
     return <div className={paginationClass}>
-        <div className={paginationItemClass}>quickLeft</div>
-        <div className={paginationItemClass}>left</div>
+        <div className={paginationItemClass}>&lt;&lt;</div>
+        <div className={paginationItemClass}>&lt;</div>
         <div>
             <div className={paginationItemClass}>
                 1
@@ -53,8 +53,8 @@ const Pagination = ({
             }
 
         </div>
-        <div className={paginationItemClass}>right</div>
-        <div className={paginationItemClass}>quickLeft</div>
+        <div className={paginationItemClass}>&gt;</div>
+        <div className={paginationItemClass}>&gt;&gt;</div>
     </div>
 }
 

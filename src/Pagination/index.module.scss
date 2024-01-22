@@ -8,26 +8,37 @@
   justify-content: end;
   margin-top: 8px;
 
-  &-item{
+  &-item {
     border: 1px solid $primary;
     margin-left: 4px;
     cursor: pointer;
+    text-align: center;
+    &:hover{
+      color: $primary;
+    }
 
-    &-large{
-      width:  $large-pagination-min-width;
+    &-large {
+      width: $large-pagination-min-width;
       height: $large-pagination-height;
       border-radius: $large-pagination-border-radius;
-    }
-    &-normal{
-      width:  $normal-pagination-min-width;
-      height: $normal-pagination-height;
-      border-radius: $normal-pagination-border-radius;
-    }
-    &-small{
-      width:  $small-pagination-min-width;
-      height: $small-pagination-height;
-      border-radius: $small-border-radius;
+      line-height: $large-pagination-height;
+      font-size: 14px;
     }
 
+    &-normal {
+      width: $normal-pagination-min-width;
+      height: $normal-pagination-height;
+      border-radius: $normal-pagination-border-radius;
+      line-height: $normal-pagination-height;
+      font-size: 14px;
+    }
+
+    &-small {
+      width: $small-pagination-min-width;
+      height: $small-pagination-height;
+      border-radius: $small-pagination-border-radius;
+      line-height: $small-pagination-height;
+      font-size: 12px;
+    }
   }
 }

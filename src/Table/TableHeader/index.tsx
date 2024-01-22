@@ -3,6 +3,7 @@ import { ITableColumn } from "../index.d";
 
 interface ITableHeaderProps {
     columns: ITableColumn[]
+    size?: 'large' | 'normal' | 'small',
 }
 
 export const setDataEntries = (columns: ITableColumn[], dataEntries: ITableColumn[][] = [], lv: number = 0) => {

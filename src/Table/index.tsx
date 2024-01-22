@@ -11,12 +11,14 @@ interface ITableProps {
     data: ITableData,
     columns: ITableColumn[],
     width?: number,
+    size?: 'large' | 'normal' | 'small',
     isShowPagination?: boolean
 }
 
 const Table = ({
     data,
     columns,
+    size = 'normal',
     width = undefined,
     isShowPagination = true
 }: ITableProps) => {
@@ -37,7 +39,6 @@ const Table = ({
             <table
                 className={tableClass}
                 border={1}
-
             >
                 <TableHeader columns={columns} />
                 <TableBody columns={columns} data={data} />
@@ -45,6 +46,7 @@ const Table = ({
             {
                 isShowPagination && (
                     <Pagination
+                        size={size}
                         total={data.length}
                         onPaginationChange={onPaginationChangeHandle}
                     />

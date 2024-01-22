@@ -36,6 +36,8 @@ const TableBody = ({ data, columns, pageSize = 10, page = 1 }: ITableHeaderProps
     useEffect(() => {
         if (data.length > pageSize) {
             setShowData(data.slice((page - 1) * pageSize, page * pageSize));
+        }else{
+            setShowData(data);
         }
     }, [data, pageSize, page]);
 

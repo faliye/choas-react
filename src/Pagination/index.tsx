@@ -12,14 +12,15 @@ interface IPaginationProps {
 }
 
 
+
 const Pagination = ({
     total = 0,
     pageSize = 10,
     size = 'normal',
     onPaginationChange,
 }: IPaginationProps) => {
-    const [page, setPage] = useState<number>(0);
-    const [maxPage, setMaxPage] = useState<number>(0);
+    const [page, setPage] = useState<number>(1);
+    const [maxPage, setMaxPage] = useState<number>(1);
 
     const paginationClass = classNames({
         [styles["pagination"]]: true
@@ -42,6 +43,10 @@ const Pagination = ({
         }
     }, [total, pageSize]);
 
+    const EllispsePaginationItem = ({ keyName, paginationItemClass }: { keyName: string, paginationItemClass: string }) => (
+        <div key={keyName} className={paginationItemClass} style={{ border: 'none' }}>...</div>
+    )
+
     const createpPaginationItems = useCallback(() => {
         const paginationItem = new Array(maxPage).fill(1).map((i, index: number) => {
             const currentPage: number = index + 1;
@@ -59,30 +64,45 @@ const Pagination = ({
                 >{index + 1}</div>
             )
         });
+        if (maxPage === 1) {
+            return paginationItem;
+        }
         const showCount: number = 5;
         if (page < showCount) {
             paginationItem.splice(
                 maxPage - showCount,
                 maxPage - showCount - 1,
-                <div key='rightEllispse' className={paginationItemClass} style={{ border: 'none' }}>...</div>
+                <EllispsePaginationItem
+                    paginationItemClass={paginationItemClass}
+                    keyName='rightEllispse'
+                />
             );
         } else if (page > maxPage - showCount + 1) {
             paginationItem.splice(
                 1,
                 maxPage - showCount - 1,
-                <div key='leftEllispse' className={paginationItemClass} style={{ border: 'none' }}>...</div>
+                <EllispsePaginationItem
+                    paginationItemClass={paginationItemClass}
+                    keyName='leftEllispse'
+                />
             );
         } else {
             const half = Math.floor(showCount / 2);
             paginationItem.splice(
                 page + half,
                 maxPage - page - half - 1,
-                <div key='rightEllispse' className={paginationItemClass} style={{ border: 'none' }}>...</div>
+                <EllispsePaginationItem
+                    paginationItemClass={paginationItemClass}
+                    keyName='rightEllispse'
+                />
             );
             paginationItem.splice(
                 1,
                 page - half - 1,
-                <div key='leftEllispse' className={paginationItemClass} style={{ border: 'none' }}>...</div>
+                <EllispsePaginationItem
+                    paginationItemClass={paginationItemClass}
+                    keyName='leftEllispse'
+                />
             );
         }
         return paginationItem;

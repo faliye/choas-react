@@ -27,14 +27,17 @@ const TableFooter = ({ renderTFooter, data, columns }: ITableFooter) => {
         let className: string | null = '';
         if (preChildren) {
             const len = preChildren.length;
-            for (let i = 0; i < len; i++) {
-                const node = preChildren[i]?.props?.children;
-                if (typeof node !== 'object') {
-                    children?.push(preChildren[i]);
-                } else {
-
-                    children?.push(addElementClass(preChildren[i]));
+            if (len) {
+                for (let i = 0; i < len; i++) {
+                    const node = preChildren[i]?.props?.children;
+                    if (typeof node !== 'object') {
+                        children?.push(preChildren[i]);
+                    } else {
+                        children?.push(addElementClass(preChildren[i]));
+                    }
                 }
+            } else {
+                children?.push(preChildren);
             }
         }
 

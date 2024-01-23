@@ -11,10 +11,10 @@
   }
 
   &-tr {
-    background: red;
+    border: 1px solid $primary;
   }
 
   &-td{
-
+    text-align: center;
   }
 }

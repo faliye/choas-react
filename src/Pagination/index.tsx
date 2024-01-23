@@ -73,6 +73,7 @@ const Pagination = ({
                 maxPage - showCount,
                 maxPage - showCount - 1,
                 <EllispsePaginationItem
+                    key={'rightEllispse'}
                     paginationItemClass={paginationItemClass}
                     keyName='rightEllispse'
                 />
@@ -82,6 +83,7 @@ const Pagination = ({
                 1,
                 maxPage - showCount - 1,
                 <EllispsePaginationItem
+                    key={'leftEllispse'}
                     paginationItemClass={paginationItemClass}
                     keyName='leftEllispse'
                 />
@@ -92,6 +94,7 @@ const Pagination = ({
                 page + half,
                 maxPage - page - half - 1,
                 <EllispsePaginationItem
+                    key={'rightEllispse'}
                     paginationItemClass={paginationItemClass}
                     keyName='rightEllispse'
                 />
@@ -100,6 +103,7 @@ const Pagination = ({
                 1,
                 page - half - 1,
                 <EllispsePaginationItem
+                    key={'leftEllispse'}
                     paginationItemClass={paginationItemClass}
                     keyName='leftEllispse'
                 />
@@ -110,16 +114,32 @@ const Pagination = ({
 
     return <div className={paginationClass}>
         <div
+            key="quickLeftJump"
             className={paginationItemClass}
         >
             &lt;&lt;
         </div>
-        <div className={paginationItemClass}>&lt;</div>
+        <div
+            key="leftJump"
+            className={paginationItemClass}
+        >
+            &lt;
+        </div>
         <div style={{ display: 'flex' }}>
             {createpPaginationItems()}
         </div>
-        <div className={paginationItemClass}>&gt;</div>
-        <div className={paginationItemClass}>&gt;&gt;</div>
+        <div
+            className={paginationItemClass}
+            key="rightJump"
+        >
+            &gt;
+        </div>
+        <div
+            className={paginationItemClass}
+            key="quickRightJump"
+        >
+            &gt;&gt;
+        </div>
     </div>
 }
 

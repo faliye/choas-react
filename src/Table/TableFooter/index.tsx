@@ -9,7 +9,7 @@ interface ITableFooter {
 
 const TableFooter = ({ renderTFooter, data, columns }: ITableFooter) => {
     if(!renderTFooter){
-        return
+        return null;
     }
     return (
         <tfoot>

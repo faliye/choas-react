@@ -1,8 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ITableData, ITableColumn } from './index.d'
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
+import TableFooter from './TableFooter';
 import Pagination from '../Pagination';
+
 import classNames from 'classnames';
 
 import styles from './index.module.scss';
@@ -12,6 +14,7 @@ interface ITableProps {
     columns: ITableColumn[],
     width?: number,
     size?: 'large' | 'normal' | 'small',
+    renderTFooter?: (data: ITableData, columns: ITableColumn[]) => React.ReactElement
     isShowPagination?: boolean,
     pagination?: {
         onChange?: (page: number) => void,
@@ -19,15 +22,37 @@ interface ITableProps {
     }
 }
 
+export const setDataEntries = (
+    columns: ITableColumn[],
+    dataEntries: string[] = [],
+) => {
+    columns.forEach((item: ITableColumn) => {
+        if (item.children) {
+            return setDataEntries(item.children, dataEntries);
+        } else {
+            if (dataEntries.every(key => key !== item.key)) {
+                dataEntries.push(item.key)
+            }
+        }
+    })
+    return dataEntries;
+}
+
 const Table = ({
     data,
     columns,
     size = 'normal',
     width = undefined,
+    renderTFooter = undefined,
     isShowPagination = true,
     pagination = {}
 }: ITableProps) => {
     const [page, setPage] = useState<number>(1);
+
+    const [showData, setShowData] = useState<ITableData>([]);
+    const [dataKey, setDataKey] = useState<string[]>([]);
+
+    const { pageSize = 10 } = pagination;
 
     const tableClass = classNames(styles.table, {
     });
@@ -35,7 +60,20 @@ const Table = ({
     const onPaginationChangeHandle = useCallback((page: number) => {
         setPage(page);
         pagination?.onChange?.(page);
-    }, [pagination])
+    }, [pagination]);
+
+    useEffect(() => {
+        if (data.length > pageSize) {
+            setShowData(data.slice((page - 1) * pageSize, page * pageSize));
+        } else {
+            setShowData(data);
+        }
+    }, [data, pageSize, page]);
+
+    useEffect(() => {
+        setDataKey(setDataEntries(columns));
+    }, [columns]);
+
     return (
         <div
             style={{
@@ -48,10 +86,13 @@ const Table = ({
             >
                 <TableHeader columns={columns} />
                 <TableBody
+                    data={showData}
+                    dataKey={dataKey}
+                />
+                <TableFooter
+                    renderTFooter={renderTFooter}
+                    data={showData}
                     columns={columns}
-                    data={data}
-                    page={page}
-                    pageSize={pagination.pageSize}
                 />
             </table>
             {

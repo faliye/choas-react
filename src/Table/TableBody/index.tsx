@@ -13,11 +13,11 @@ interface ITableHeaderProps {
 const TableBody = ({ data, dataKey }: ITableHeaderProps) => {
 
     const trClass = classNames({
-        [styles["table-tr"]]: true
+        [styles["table-tr"]]: true,
     });
 
     const tdClass = classNames({
-        [styles["table-td"]]: true
+        [styles["table-td"]]: true,
     });
 
     return (

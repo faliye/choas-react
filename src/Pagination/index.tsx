@@ -23,7 +23,7 @@ const Pagination = ({
     const [maxPage, setMaxPage] = useState<number>(1);
 
     const paginationClass = classNames({
-        [styles["pagination"]]: true
+        [styles["pagination"]]: true,
     });
 
     const paginationItemClass = classNames({
@@ -35,16 +35,22 @@ const Pagination = ({
 
     useEffect(() => {
         if (total) {
-            setPage(1)
+            setPage(1);
         }
         const maxPage = Math.floor(total / pageSize);
         if (maxPage > 1) {
-            setMaxPage(maxPage)
+            setMaxPage(maxPage);
         }
     }, [total, pageSize]);
 
-    const EllispsePaginationItem = ({ keyName, paginationItemClass }: { keyName: string, paginationItemClass: string }) => (
-        <div key={keyName} className={paginationItemClass} style={{ border: 'none' }}>...</div>
+    const EllispsePaginationItem = ({
+        keyName,
+        paginationItemClass
+    }: { keyName: string, paginationItemClass: string }) => (
+        <div
+         key={keyName} 
+         className={paginationItemClass}
+          style={{ border: 'none' }}>...</div>
     )
 
     const createpPaginationItems = useCallback(() => {

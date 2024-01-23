@@ -18,8 +18,8 @@ interface ITableProps {
     isShowPagination?: boolean,
     pagination?: {
         onChange?: (page: number) => void,
-        pageSize?: number
-    }
+        pageSize?: number,
+    },
 }
 
 export const setDataEntries = (
@@ -31,7 +31,7 @@ export const setDataEntries = (
             return setDataEntries(item.children, dataEntries);
         } else {
             if (dataEntries.every(key => key !== item.key)) {
-                dataEntries.push(item.key)
+                dataEntries.push(item.key);
             }
         }
     })
@@ -45,7 +45,7 @@ const Table = ({
     width = undefined,
     renderTFooter = undefined,
     isShowPagination = true,
-    pagination = {}
+    pagination = {},
 }: ITableProps) => {
     const [page, setPage] = useState<number>(1);
 

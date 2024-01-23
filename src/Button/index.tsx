@@ -75,7 +75,7 @@ const Button = ({
       style={
         isWaterWave ? {
           boxShadow: "none",
-          ...style
+          ...style,
         } : style
       }
     >

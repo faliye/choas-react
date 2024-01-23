@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { ITableColumn } from "../index.d";
 
 interface ITableHeaderProps {
-    columns: ITableColumn[]
+    columns: ITableColumn[],
     size?: 'large' | 'normal' | 'small',
 }
 
-export const setDataEntries = (columns: ITableColumn[], dataEntries: ITableColumn[][] = [], lv: number = 0) => {
+export const setDataEntries = (
+    columns: ITableColumn[],
+    dataEntries: ITableColumn[][] = [],
+    lv: number = 0
+) => {
     dataEntries[lv] = dataEntries[lv] || [];
     columns.forEach((item: ITableColumn) => {
         dataEntries[lv].push(item);

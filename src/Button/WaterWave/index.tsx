@@ -4,16 +4,16 @@ import { IWaterWavePoint } from "../index.d";
 import styles from '../index.module.scss';
 
 interface IWaterWaveProps {
-    wavePoint?: IWaterWavePoint
-    speedCoe?: number
-}
+    wavePoint?: IWaterWavePoint,
+    speedCoe?: number,
+};
 
 type IWaterWavePointWater = IWaterWavePoint & {
     nx: number,
     ny: number,
     spd: number,
-    opt: number
-}
+    opt: number,
+};
 
 export const WaterWave = ({ wavePoint }: IWaterWaveProps) => {
     const [waveList, setWaveList] = useState<(IWaterWavePointWater)[]>([]);
@@ -29,7 +29,7 @@ export const WaterWave = ({ wavePoint }: IWaterWaveProps) => {
                 nx: wavePoint.x,
                 ny: wavePoint.y,
                 spd: 1,
-                opt: 1
+                opt: 1,
             }]);
         }
     }, [wavePoint]);
@@ -57,7 +57,7 @@ export const WaterWave = ({ wavePoint }: IWaterWaveProps) => {
             }
         }
     }, [waveList]);
-    
+
     return <>
         {
             waveList.map(item => {

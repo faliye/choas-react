@@ -6,22 +6,19 @@ import classNames from 'classnames';
 import styles from '../index.module.scss'
 
 interface ITableFooter {
-    renderTFooter?: (data: ITableData, columns: ITableColumn[]) => ReactElement
+    renderTFooter?: (data: ITableData, columns: ITableColumn[]) => ReactElement,
     data: ITableData,
     columns: ITableColumn[],
 }
 
-
-
-
 const TableFooter = ({ renderTFooter, data, columns }: ITableFooter) => {
 
     const trClass = classNames({
-        [styles["table-tr"]]: true
+        [styles["table-tr"]]: true,
     });
 
     const tdClass = classNames({
-        [styles["table-td"]]: true
+        [styles["table-td"]]: true,
     });
 
     const addElementClass = useCallback((ele: ReactElement): ReactElement => {
@@ -31,9 +28,9 @@ const TableFooter = ({ renderTFooter, data, columns }: ITableFooter) => {
         if (preChildren) {
             const len = preChildren.length;
             for (let i = 0; i < len; i++) {
-                const node = preChildren[i]?.props?.children
+                const node = preChildren[i]?.props?.children;
                 if (typeof node !== 'object') {
-                    children?.push(preChildren[i])
+                    children?.push(preChildren[i]);
                 } else {
 
                     children?.push(addElementClass(preChildren[i]));
@@ -58,8 +55,6 @@ const TableFooter = ({ renderTFooter, data, columns }: ITableFooter) => {
     if (!renderTFooter) {
         return null;
     }
-    // console.log(renderTFooter?.(data, columns))
-    // console.log(addElementClass(renderTFooter?.(data, columns)))
     return (
         <tfoot>
             {

@@ -1,23 +1,19 @@
 import React from "react";
 import classNames from 'classnames';
 
-import { ITableDataItem } from "../index.d";
+import { ITableDataItem, IDataEntries } from "../index.d";
 
 import styles from '../index.module.scss'
 
 interface ITableHeaderProps {
     data: ITableDataItem[][],
-    dataKey: string[],
+    dataWithKey: IDataEntries[],
 }
 
-const TableBody = ({ data, dataKey }: ITableHeaderProps) => {
+const TableBody = ({ data, dataWithKey }: ITableHeaderProps) => {
 
     const trClass = classNames({
         [styles["table-tr"]]: true,
-    });
-
-    const tdClass = classNames({
-        [styles["table-td"]]: true,
     });
 
     return (
@@ -30,11 +26,17 @@ const TableBody = ({ data, dataKey }: ITableHeaderProps) => {
                             className={trClass}
                         >
                             {
-                                dataKey.map((key: string) => {
-                                    const item = d.find(item => item.key === key);
+                                dataWithKey.map((key: IDataEntries) => {
+                                    const item = d.find(item => item.key === key.key);
+                                    const tdClass = classNames({
+                                        [styles["table-align-left"]]: !key.item.align || key.item.align === 'left',
+                                        [styles["table-align-center"]]: key.item.align === 'center',
+                                        [styles["table-align-right"]]: key.item.align === 'right',
+                                    });
+                                    item
                                     return (
                                         <td
-                                            key={key}
+                                            key={item?.key}
                                             className={tdClass}
                                         >
                                             {item?.value}

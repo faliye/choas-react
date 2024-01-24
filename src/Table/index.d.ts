@@ -9,6 +9,12 @@ export interface ITableColumn {
     title: string,
     colSpan?: number,
     rowSpan?: number,
+    align?: string,
     render?: (values: any, index: number, item: ITableDataItem) => React.ReactElement,
     children?: ITableColumn[],
+}
+
+export interface IDataEntries {
+    key: string,
+    item: ITableColumn
 }

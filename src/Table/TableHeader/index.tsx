@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ITableColumn } from "../index.d";
+import classNames from 'classnames';
+import styles from '../index.module.scss';
 
 interface ITableHeaderProps {
     columns: ITableColumn[],
@@ -36,11 +38,17 @@ const TableHeader = ({ columns }: ITableHeaderProps) => {
                         <tr key={index}>
                             {
                                 columns.map((item: ITableColumn) => {
+                                    const tdClass = classNames({
+                                        [styles["table-align-left"]]: !item.align || item.align === 'left',
+                                        [styles["table-align-center"]]: item.align === 'center',
+                                        [styles["table-align-right"]]: item.align === 'right',
+                                    });
                                     return (
                                         <th
                                             rowSpan={item.rowSpan}
                                             colSpan={item.colSpan}
                                             key={item.key}
+                                            className={tdClass}
                                         >
                                             {
                                                 item.title

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ITableData, ITableColumn } from './index.d'
+import { ITableData, ITableColumn, IDataEntries } from './index.d'
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import TableFooter from './TableFooter';
@@ -24,14 +24,17 @@ interface ITableProps {
 
 export const setDataEntries = (
     columns: ITableColumn[],
-    dataEntries: string[] = [],
+    dataEntries: IDataEntries[] = [],
 ) => {
     columns.forEach((item: ITableColumn) => {
         if (item.children) {
             return setDataEntries(item.children, dataEntries);
         } else {
-            if (dataEntries.every(key => key !== item.key)) {
-                dataEntries.push(item.key);
+            if (dataEntries.every(dataEntry => dataEntry.key !== item.key)) {
+                dataEntries.push({
+                    key: item.key,
+                    item,
+                });
             }
         }
     })
@@ -50,7 +53,7 @@ const Table = ({
     const [page, setPage] = useState<number>(1);
 
     const [showData, setShowData] = useState<ITableData>([]);
-    const [dataKey, setDataKey] = useState<string[]>([]);
+    const [dataWithKey, setDataWithKey] = useState<IDataEntries[]>([]);
 
     const { pageSize = 10 } = pagination;
 
@@ -71,7 +74,7 @@ const Table = ({
     }, [data, pageSize, page]);
 
     useEffect(() => {
-        setDataKey(setDataEntries(columns));
+        setDataWithKey(setDataEntries(columns));
     }, [columns]);
 
     return (
@@ -87,7 +90,7 @@ const Table = ({
                 <TableHeader columns={columns} />
                 <TableBody
                     data={showData}
-                    dataKey={dataKey}
+                    dataWithKey={dataWithKey}
                 />
                 <TableFooter
                     renderTFooter={renderTFooter}
